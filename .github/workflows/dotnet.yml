@@ -26,3 +26,20 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Publish the application
+        run: dotnet publish --configuration Release --output ./publish
+
+      # Step 7: Set up Google Cloud authentication
+      - name: Set up Google Cloud Authentication
+        run: |
+          echo "${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}" > /tmp/gcp-key.json
+          gcloud auth activate-service-account --key-file /tmp/gcp-key.json
+          gcloud config set project teak-environs-445405-g2
+          
+          
+
+      # Step 8: Deploy to GCP App Engine
+      - name: Deploy to Google Cloud App Engine
+        run: |
+          gcloud app browse || true  # Optional: Verify if App Engine is reachable
+          gcloud app deploy ./publish/app.yaml --quiet 
