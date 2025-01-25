@@ -1,8 +1,8 @@
 runtime: aspnetcore
 env: flex
 
-runtime_config:
-  operating_system: "ubuntu-22.04"
+#runtime_config:
+  #operating_system: "ubuntu22"
 
 service: "inventory"
 
