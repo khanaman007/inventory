@@ -30,8 +30,8 @@ jobs:
       run: dotnet publish --configuration Release --output ./publish
 
       # Step 7: Set up Google Cloud authentication
-    - name: Set up Google Cloud credentials
-      uses: google-github-actions/auth@v0
+    - name: Set up Google Cloud credentials service account
+      uses: google-github-actions/auth@v1
       with:
         credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
           
