@@ -30,13 +30,13 @@ jobs:
 
       # Step 3: Restore dependencies
       - name: Restore dependencies
-        run: dotnet restore src/inventory.csproj
+        run: dotnet restore
       - name: List files for debugging
         run: ls -lrta
 
       # Step 4: Build the application
       - name: Build the application
-        run:  dotnet build src/inventory.csproj --configuration Release
+        run:  dotnet build inventory.csproj --configuration Release
 
       # Step 5: Run tests (Optional step, add if you have unit tests)
       - name: Run tests
@@ -44,7 +44,7 @@ jobs:
 
       # Step 6: Publish the application
       - name: Publish the application
-        run: dotnet publish src/inventory.csproj --configuration Release --output ./publish
+        run: dotnet publish inventory.csproj --configuration Release --output ./publish
 
       # Step 7: Set up Google Cloud authentication
       - name: Set up Google Cloud Authentication
