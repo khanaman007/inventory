@@ -1,21 +1,28 @@
-FROM komljen/ubuntu
-MAINTAINER Alen Komljen <alen.komljen@live.com>
+# Use the official .NET SDK image to build the application
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
-ENV USER root
-ENV PASS aiPeekai0AeZ2meephoolais7doo1thu
+# Set the working directory inside the container
+WORKDIR /app
 
-RUN \
-  apt-get update && \
-  apt-get -y install \
-          mysql-server-5.5 && \
-  rm -rf /var/lib/apt/lists/*
+# Copy the .csproj file and restore any dependencies (via 'dotnet restore')
+COPY *.csproj ./
+RUN dotnet restore
 
-COPY my.cnf /etc/mysql/my.cnf
-COPY start.sh start.sh
+# Copy the entire project and publish the app to the /app/publish directory
+COPY . ./
+RUN dotnet publish --configuration Release --output /app/publish
 
-VOLUME ["/var/lib/mysql"]
+# Use the official .NET runtime image to run the application
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 
-RUN rm /usr/sbin/policy-rc.d
-CMD ["/start.sh"]
+# Set the working directory inside the container
+WORKDIR /app
 
-EXPOSE 3306
+# Copy the published app from the build stage
+COPY --from=build /app/publish .
+
+# Expose the port that the app will run on
+EXPOSE 8080
+
+# Define the entrypoint to run the app
+ENTRYPOINT ["dotnet", "inventory.dll"]
