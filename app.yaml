@@ -1,11 +1,12 @@
-runtime: aspnetcore
-# env: flex
+runtime: custom
+env: flex
 
 # runtime_config:
   # operating_system: "ubuntu2204"
 
-# service: "inventory"
+service: "inventory"
+entrypoint: dotnet inventory.dll
 
-# automatic_scaling:
-  # min_num_instances: 1
-  # max_num_instances: 5
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 5
