@@ -44,3 +44,5 @@ jobs:
       run: |
           gcloud app browse || true  # Optional: Verify if App Engine is reachable
           gcloud app deploy  -v v4 app.yaml --quiet 
+          gcloud app services set-traffic inventory --splits v1=0.8,v2=0.2
+
