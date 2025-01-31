@@ -40,7 +40,7 @@ jobs:
           
 
       # Step 8: Deploy to GCP App Engine
-    - name: Deploy to Google Cloud App Engine
+    - name: Deploy to Google Cloud App Engine of GCP
       run: |
           gcloud app browse || true  # Optional: Verify if App Engine is reachable
           gcloud app deploy  -v v4 app.yaml --quiet 
