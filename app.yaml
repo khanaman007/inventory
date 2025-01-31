@@ -11,4 +11,4 @@ traffic_split :
     - version : v1
       percent : 80
     - version : v2
-      percen t: 20
+      percen t : 20
