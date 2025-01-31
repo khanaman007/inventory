@@ -28,8 +28,8 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Publish the application
-      run: dotnet publish --configuration Release --output ./publish
+    # - name: Publish the application
+      # run: dotnet publish --configuration Release --output ./publish
 
       # Step 7: Set up Google Cloud authentication
     - name: Set up Google Cloud credentials service account
@@ -43,4 +43,4 @@ jobs:
     - name: Deploy to Google Cloud App Engine
       run: |
           gcloud app browse || true  # Optional: Verify if App Engine is reachable
-          gcloud app deploy  -v v3 ./publish/app.yaml --quiet 
+          gcloud app deploy  -v v4 app.yaml --quiet 

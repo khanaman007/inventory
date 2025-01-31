@@ -5,11 +5,15 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copy the .csproj file and restore any dependencies (via 'dotnet restore')
-COPY *.csproj ./
+COPY  inventory.csproj ./
+
+# Restore dependencies
 RUN dotnet restore
 
-# Copy the entire project and publish the app to the /app/publish directory
+# Copy the remaining source code and build the application
 COPY . ./
+
+# Publish the application
 RUN dotnet publish --configuration Release --output /app/publish
 
 # Use the official .NET runtime image to run the application
@@ -21,8 +25,8 @@ WORKDIR /app
 # Copy the published app from the build stage
 COPY --from=build /app/publish .
 
-# Expose the port that the app will run on
+# Expose the required port for App Engine (8080)
 EXPOSE 8080
 
-# Define the entrypoint to run the app
-ENTRYPOINT ["dotnet", "inventory.dll"]
+# Set the entry point to start the application
+ENTRYPOINT ["dotnet", "inventory.dll"]  # Replace with your actual DLL name
