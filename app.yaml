@@ -6,9 +6,3 @@ automatic_scaling :
   max_num_instances : 2  # Adjust based on expected traffic and cost considerations
   target_cpu_utilization : 0.65  # You can tune this value to avoid over-provisioning instances
   target_throughput_utilization : 0.75
-traffic_split :
-  versions :
-    - version : v1
-      percent : 80
-    - version : v2
-      percent : 20
