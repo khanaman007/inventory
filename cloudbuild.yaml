@@ -5,7 +5,7 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/inventory'
+      - 'gcr.io$(PROJECT_ID)/inventory'  # Correct variable substitution syntax
       - '.'
 
   # Step 2: Push the Docker image to Google Container Registry
@@ -13,7 +13,7 @@ steps:
     id: 'Push Docker Image'
     args:
       - 'push'
-      - 'gcr.io/$PROJECT_ID/inventory'
+      - 'gcr.io$(PROJECT_ID)/inventory'  # Correct variable substitution syntax
 
   # Step 3: Deploy to Google App Engine using the Custom Runtime
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -22,11 +22,11 @@ steps:
     args:
       - 'app'
       - 'deploy'
-      - '--image-url=gcr.io/$PROJECT_ID/inventory'
+      - '--image-url=gcr.io$(PROJECT_ID)/inventory'  # Correct variable substitution syntax
       - '--quiet'
 
 # Substitute these for your environment variables if needed:
 images:
-  - 'gcr.io/$PROJECT_ID/inventory'
+  - 'gcr.io$(PROJECT_ID)/inventory'  # Correct variable substitution syntax
 
 timeout: '1200s'  # Timeout for the build process (20 minutes)
