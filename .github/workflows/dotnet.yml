@@ -40,11 +40,9 @@ jobs:
           
 
       # Step 8: Deploy to GCP App Engine
-    # - name: Deploy to Google Cloud App Engine of GCP
-      # run: |
-          # gcloud app browse || true  # Optional: Verify if App Engine is reachable
-          # gcloud app deploy  -v v4 app.yaml --quiet 
-          # gcloud app services set-traffic inventory --splits v3=0.8,v4=0.2
-    # Step 3: Trigger Cloud Build
-     - name: Trigger Cloud Build
-       run:  gcloud builds submit  --config cloudbuild.yaml --substitutions=_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
+    - name: Deploy to Google Cloud App Engine of GCP
+      run: |
+          gcloud app browse || true  # Optional: Verify if App Engine is reachable
+          gcloud app deploy  -v v4 app.yaml --quiet 
+          gcloud app services set-traffic inventory --splits v3=0.8,v4=0.2
+
