@@ -32,6 +32,11 @@ steps:
       - '--allow-unauthenticated'  # Allow public access (remove if not desired)
 
 # Optional: Define images to push after the build
+
+options:
+  logging: CLOUD_LOGGING_ONLY  # Send logs only to Cloud Logging
+  build:
+    logs_bucket: 'gs://teak-environs-445405-g2.appspot.com'
 images:
   - 'gcr.io/$GCP_PROJECT_ID/inventory:$COMMIT_SHA'
 
