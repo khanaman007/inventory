@@ -43,4 +43,4 @@ options:
   logging: CLOUD_LOGGING_ONLY  # Send logs only to Cloud Logging
 
 # Logging bucket option, if needed
-logs_bucket: 'gs://teak-environs-445405-g2.appspot.com'  # Specify your GCS bucket for logs
+#logs_bucket: 'gs://teak-environs-445405-g2.appspot.com'  # Specify your GCS bucket for logs
