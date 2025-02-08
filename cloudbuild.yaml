@@ -28,7 +28,7 @@ steps:
       - '--platform'
       - 'managed'
       - '--region'
-      - 'us-central1'  # Specify your region
+      - 'europe-west4'  # Specify your region
       - '--allow-unauthenticated'  # Allow public access (remove if not desired)
 
 # Optional: Define images to push after the build
