@@ -5,7 +5,7 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/$GCP_PROJECT_ID/inventory:$COMMIT_SHA'  # Tag the image with the commit SHA
+      - 'gcr.io/$_GCP_PROJECT_ID/inventory:$COMMIT_SHA'  # Tag the image with the commit SHA
       - '.'
 
   # Step 2: Push the Docker image to Google Container Registry (GCR)
@@ -13,7 +13,7 @@ steps:
     id: 'Push Docker image'
     args:
       - 'push'
-      - 'gcr.io/$GCP_PROJECT_ID/inventory:$COMMIT_SHA'
+      - 'gcr.io/$_GCP_PROJECT_ID/inventory:$COMMIT_SHA'
 
   # Step 3: Deploy the Docker image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -24,7 +24,7 @@ steps:
       - 'deploy'
       - 'inventory'  # Name of the Cloud Run service
       - '--image'
-      - 'gcr.io/$GCP_PROJECT_ID/inventory:$COMMIT_SHA'
+      - 'gcr.io/$_GCP_PROJECT_ID/inventory:$COMMIT_SHA'
       - '--platform'
       - 'managed'
       - '--region'
@@ -33,7 +33,7 @@ steps:
 
 # Optional: Define images to push after the build
 images:
-  - 'gcr.io/$GCP_PROJECT_ID/inventory:$COMMIT_SHA'
+  - 'gcr.io/$_GCP_PROJECT_ID/inventory:$COMMIT_SHA'
 
 # Set the timeout for the build process (20 minutes)
 timeout: '1200s'
