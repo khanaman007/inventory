@@ -1,0 +1,46 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0
+
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    - name: Publish the application
+      run: dotnet publish --configuration Release --output ./publish
+
+      # Step 7: Set up Google Cloud authentication
+    - name: Set up Google Cloud credentials service account
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+          
+          
+
+      # Step 8: Deploy to GCP App Engine
+    - name: Deploy to Google Cloud App Engine
+      run: |
+          gcloud app browse || true  # Optional: Verify if App Engine is reachable
+          gcloud app deploy  -v v5 app.yaml --quiet 
