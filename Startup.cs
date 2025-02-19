@@ -27,7 +27,7 @@ namespace inventory
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddDbContext<BookContext>();//(options => options.UseMySQL(Configuration.GetConnectionString("BooksDB")));
+            services.AddDbContext<BookContext>(options => options.UseMySQL(Configuration.GetConnectionString("BooksDB")));
             
         }
 

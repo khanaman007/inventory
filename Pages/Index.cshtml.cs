@@ -25,13 +25,13 @@ namespace inventory.Pages
         {
             List<Book> books=null;
             
-            // UNCOMMENT AFTER SETTING THE CONNECTION STRING
-            // try  {
-            //     books=_context.Books.ToList();
-            // }
-            // catch (Exception ex)  {
-            //     ViewData["Error"]=ex.Message;
-            // }
+            
+             try  {
+                 books=_context.Books.ToList();
+             }
+             catch (Exception ex)  {
+                 ViewData["Error"]=ex.Message;
+             }
             ViewData["books"]=books;
 
         }
