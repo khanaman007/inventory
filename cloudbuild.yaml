@@ -36,7 +36,7 @@ images:
   - 'gcr.io/$_GCP_PROJECT_ID/inventory:$COMMIT_SHA'
 
 # Set the timeout for the build process (20 minutes)
-timeout: '1200s'
+timeout: '180s'
 
 # Logging Configuration
 options:
