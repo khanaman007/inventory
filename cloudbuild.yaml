@@ -28,7 +28,7 @@ steps:
       - '--platform'
       - 'managed'
       - '--region'
-      - ' me-west1-b'  # Specify your region
+      - 'us-central1'  # Specify your region
       - '--allow-unauthenticated'  # Allow public access (remove if not desired)
 
 # Optional: Define images to push after the build
@@ -36,7 +36,7 @@ images:
   - 'gcr.io/$_GCP_PROJECT_ID/inventory:$COMMIT_SHA'
 
 # Set the timeout for the build process (20 minutes)
-timeout: '180s'
+timeout: '1200s'
 
 # Logging Configuration
 options:
